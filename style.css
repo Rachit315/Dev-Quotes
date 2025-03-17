@@ -1,0 +1,136 @@
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            font-family: 'Share Tech Mono', monospace;
+            overflow: hidden;
+        }
+        #vanta-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+        .quote-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            padding: 30px;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        #quote {
+            font-size: 28px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        #author {
+            font-size: 20px;
+            font-style: italic;
+            color: #8fff8a;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+        }
+
+        /* Matrix background styles */
+        .grid-container {
+            --grid: 8rem;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+            perspective: 100rem;
+            animation: rotate 120s linear infinite forwards;
+            z-index: 1;
+        }
+
+        .plane {
+            --dir: 1;
+            width: 300%;
+            height: 150%;
+            min-height: 70rem;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform-style: preserve-3d;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotateX(85deg);
+        }
+
+        .plane:last-child {
+            --dir: -1;
+            top: 0;
+            transform-origin: top center;
+            transform: translateX(-50%) rotateX(-85deg);
+        }
+
+        .plane > * {
+            transform-style: preserve-3d;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+        .plane > *::before, 
+        .plane > *::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .plane > *::before {
+            background-image: 
+                repeating-linear-gradient(to left, #00ff00, #00ff00 2px, transparent 2px, transparent var(--grid)), 
+                repeating-linear-gradient(to bottom, #00ff00, #00ff00 2px, transparent 2px, transparent var(--grid));
+            animation: move 2s linear infinite forwards;
+        }
+
+        .plane > *::after {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) var(--grid), transparent);
+            z-index: 2;
+            transform: translateZ(1px);
+        }
+
+        .glow {
+            filter: blur(1rem);
+            z-index: 1;
+            mix-blend-mode: plus-lighter;
+            opacity: 0.5;
+        }
+
+        @keyframes move {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(calc(var(--grid) * var(--dir)));
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateZ(0deg);
+            }
+            to {
+                transform: rotateZ(360deg);
+            }
+        }

@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "DEV Quotes New Tab",
+  "version": "1.0",
+  "description": "Shows programming quotes on new tab",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["activeTab"],
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  }
+} 
